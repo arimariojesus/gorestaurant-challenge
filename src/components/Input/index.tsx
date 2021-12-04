@@ -3,25 +3,33 @@ import {
   useRef,
   useState,
   useCallback,
-} from 'react';
+  InputHTMLAttributes,
+  FocusEventHandler,
+} from "react";
 
-import { useField } from '@unform/core';
+import { useField } from "@unform/core";
 
-import { Container } from './styles';
+import { Container } from "./styles";
+import { IconType } from "react-icons";
 
-const Input = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef(null);
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  icon: IconType;
+}
+
+const Input = ({ name, icon: Icon, ...rest }: IInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
   const { fieldName, defaultValue, registerField } = useField(name);
 
-  const handleInputFocus = useCallback(() => {
+  const handleInputFocus = useCallback<FocusEventHandler<HTMLInputElement>>(() => {
     setIsFocused(true);
   }, []);
 
-  const handleInputBlur = useCallback(() => {
+  const handleInputBlur = useCallback<FocusEventHandler<HTMLInputElement>>(() => {
     setIsFocused(false);
 
     setIsFilled(!!inputRef.current?.value);
@@ -31,7 +39,7 @@ const Input = ({ name, icon: Icon, ...rest }) => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      path: "value",
     });
   }, [fieldName, registerField]);
 
