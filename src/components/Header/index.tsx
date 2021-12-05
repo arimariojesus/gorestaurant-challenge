@@ -2,12 +2,13 @@ import { FiPlusSquare } from 'react-icons/fi';
 
 import { Container } from './styles';
 import Logo from '../../assets/logo.svg';
+import { ReactElement } from 'react';
 
 interface HeaderProps {
   openModal: () => void;
 }
 
-const Header = ({ openModal }: HeaderProps) => {
+const Header = ({ openModal }: HeaderProps): ReactElement => {
   return (
     <Container>
       <header>
@@ -16,7 +17,7 @@ const Header = ({ openModal }: HeaderProps) => {
           <div>
             <button
               type="button"
-              onClick={openModal}
+              onClick={() => openModal()}
             >
               <div className="text">Novo Prato</div>
               <div className="icon">

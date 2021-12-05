@@ -1,17 +1,9 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
 import api from '../../services/api';
-
-interface iFood {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  available: boolean;
-  image: string;
-}
+import { iFood } from '../../types';
 
 interface FoodProps {
   food: iFood;
@@ -19,7 +11,7 @@ interface FoodProps {
   handleEditFood: (food: iFood) => void;
 }
 
-const Food = ({ food, handleDelete, handleEditFood }: FoodProps) => {
+const Food = ({ food, handleDelete, handleEditFood }: FoodProps): ReactElement => {
   const [isAvailable, setIsAvailable] = useState(food.available);
 
   async function toggleAvailable() {

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 
 interface ModalProps {
@@ -7,17 +7,10 @@ interface ModalProps {
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
+const Modal = ({ isOpen, setIsOpen, children }: ModalProps): ReactElement => {
   const [modalStatus, setModalStatus] = useState(isOpen);
 
-  const isFirstRun = useRef(true);
-
   useEffect(() => {
-    if (isFirstRun) {
-      isFirstRun.current = false;
-      return;
-    }
-
     setModalStatus(isOpen);
   }, [isOpen]);
 
